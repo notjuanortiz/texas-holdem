@@ -37,9 +37,13 @@ class Card(object):
             13: "K"
         }
         if self.value != 1 and self.value <= 10:
-            return "[" + str(self.value) + " of " + switch.get(self.suit, "Invalid suit") + "]"
+            value = str(self.value)
+            suit = switch.get(self.suit, "Invalid suit")
+            return "[" + value + " of " + suit + "]"
         else:
-            return "[" + str(card_value.get(self.value, "0")) + " of " + switch.get(self.suit, "Invalid suit") + "]"
+            value = str(card_value.get(self.value, "0"))
+            suit = switch.get(self.suit, "Invalid suit")
+            return "[" + value + " of " + suit + "]"
 
 
 class Deck(object):
@@ -80,7 +84,8 @@ class Poker:
             self.players = players
 
     def fold(self, player):
-        ''' To fold is to discard a player's cards. In this instance, we'll just return them back into the deck.'''
+        ''' To fold is to discard a player's cards. In this instance, we'll
+         just return them back into the deck.'''
         self.deck.cards_facedown.extend(player.hand)
         player.hand = []
 
@@ -98,11 +103,11 @@ class Poker:
                           " is being handed a card: " + str(card))
                     player.hand.append(card)
 
-    def findRoyalFlush(self, cards: []):
+    def find_royal_flush(self, cards: []) -> bool:
         consecutive = 0
         last_suit = cards[0].suit
         for card in cards:
-            if card.value < 10 or card.value != 1:
+            if card.value < 10 and card.value != 1:
                 return False
             if last_suit == card.suit:
                 consecutive += 1
@@ -112,7 +117,7 @@ class Poker:
         if consecutive == 5:
             return True
 
-    # def findStraightFlush(self, card):
+    # def find_flush_straight(self, card):
 
     # def findFourOfAKind(self):
 
