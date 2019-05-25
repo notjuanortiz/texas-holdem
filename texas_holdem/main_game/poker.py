@@ -104,17 +104,16 @@ class Poker:
                     player.hand.append(card)
 
     def find_royal_flush(self, cards: []) -> bool:
-        consecutive = 0
         last_suit = cards[0].suit
+        sum = 0
         for card in cards:
             if card.value < 10 and card.value != 1:
                 return False
-            if last_suit == card.suit:
-                consecutive += 1
+            if last_suit != card.suit:
+                return False
             else:
-                last_suit = card.suit
-                consecutive = 1
-        if consecutive == 5:
+                sum += card.value
+        if sum == 47:
             return True
 
     # def find_flush_straight(self, card):
