@@ -33,6 +33,24 @@ class PokerTest(unittest.TestCase):
         self.assertFalse(
             hasRoyalFlush, "Should not contain duplicate high-cards.")
 
+    def test_find_straight_flush(self):
+        poker = Poker()
+
+        # best case scenario (out of order)
+        cards = [Card(1, 5), Card(1, 8), Card(1, 7), Card(1, 6), Card(1, 9)]
+        hasStraightFlush = poker.find_straight_flush(cards)
+        self.assertTrue(hasStraightFlush, "Should be a straight flush.")
+
+        # test missing card
+        cards = [Card(1, 5), Card(1, 8), Card(1, 7), Card(1, 6), Card(1, 10)]
+        hasStraightFlush = poker.find_straight_flush(cards)
+        self.assertFalse(hasStraightFlush, "Should all be consecutive.")
+
+        # test contains different suits
+        cards = [Card(1, 5), Card(2, 8), Card(1, 7), Card(1, 6), Card(1, 9)]
+        hasStraightFlush = poker.find_straight_flush(cards)
+        self.assertFalse(hasStraightFlush, "Should be of the same suit.")
+
 
 if __name__ == '__main__':
     unittest.main()

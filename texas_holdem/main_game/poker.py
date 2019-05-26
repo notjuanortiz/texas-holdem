@@ -116,7 +116,16 @@ class Poker:
         if sum == 47:
             return True
 
-    # def find_flush_straight(self, card):
+    def find_straight_flush(self, cards: []) -> bool:
+        last_suit = cards[0].suit
+
+        sorted_cards = sorted(cards, key=lambda card: card.value)
+        for i in range(len(sorted_cards)-1):
+            if sorted_cards[i+1].value - 1 != sorted_cards[i].value:
+                return False
+            elif sorted_cards[i].suit != last_suit:
+                return False
+        return True
 
     # def findFourOfAKind(self):
 
