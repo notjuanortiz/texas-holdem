@@ -113,8 +113,7 @@ class Poker:
                 return False
             else:
                 sum += card.value
-        if sum == 47:
-            return True
+        return sum == 47
 
     def find_straight_flush(self, cards: []) -> bool:
         last_suit = cards[0].suit
@@ -127,7 +126,18 @@ class Poker:
                 return False
         return True
 
-    # def findFourOfAKind(self):
+    def find_four_of_a_kind(self, cards) -> bool:
+        pair = 0
+        matches = 0
+        sample_size = int((len(cards)/2)-1)
+        for i in range(sample_size):
+            if cards[i].value == cards[i].value:
+                pair = cards[i].value
+                break
+        for card in cards:
+            if card.value == pair:
+                matches += 1
+        return matches == 4
 
     # def findFullHouse(self):
 

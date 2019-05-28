@@ -1,9 +1,10 @@
-import unittest
+from unittest import TestCase, main
 
 from texas_holdem.main_game.poker import Poker, Card
 
 
-class PokerTest(unittest.TestCase):
+class PokerTest(TestCase):
+
     def test_find_royal_flush(self):
         poker = Poker()
 
@@ -26,7 +27,7 @@ class PokerTest(unittest.TestCase):
         self.assertFalse(
             hasRoyalFlush, "Should contain all high-cards.")
 
-        # TODO: test repeated high card, same suits
+        # test repeated high card, same suits
         cards = [Card(3, 10), Card(2, 10), Card(
             3, 12), Card(3, 13), Card(3, 1)]
         hasRoyalFlush = poker.find_royal_flush(cards)
@@ -51,6 +52,18 @@ class PokerTest(unittest.TestCase):
         hasStraightFlush = poker.find_straight_flush(cards)
         self.assertFalse(hasStraightFlush, "Should be of the same suit.")
 
+        # test contains duplicate
+        cards = [Card(1, 5), Card(1, 5), Card(1, 7), Card(1, 6), Card(1, 8)]
+        hasStraightFlush = poker.find_straight_flush(cards)
+        self.assertFalse(hasStraightFlush, "Should have no duplicates.")
+
+    def test_find_four_of_a_kind(self):
+        poker = Poker()
+
+        cards = [Card(1, 5), Card(2, 5), Card(2, 6), Card(3, 5), Card(4, 5)]
+        hasFourOfAKind = poker.find_four_of_a_kind(cards)
+        self.assertTrue(hasFourOfAKind, "Should have four of a kind.")
+
 
 if __name__ == '__main__':
-    unittest.main()
+    main()
