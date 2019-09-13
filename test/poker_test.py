@@ -1,6 +1,5 @@
 from unittest import TestCase, main
-
-from texas_holdem.main_game.poker import Poker, Card
+from texas_holdem import Poker, Card
 
 
 class PokerTest(TestCase):
