@@ -10,6 +10,15 @@ class Player(object):
         self.hand = []
         ''' A list of cards (2) representing this player's hand.'''
 
+        self.chips = 0
+
+    def bid(self, amount):
+        if amount < self.chips:
+            print("You don't have enough chips to bid " + amount)
+        else:
+            self.chips -= amount
+        return self.chips
+
 
 class Card(object):
     def __init__(self, suit, value):
